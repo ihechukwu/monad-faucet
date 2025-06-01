@@ -22,13 +22,9 @@ const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 const abiPath = path.join(__dirname, "ABI.json");
 const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
 
-const provider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
+const provider = new ethers.JsonRpcProvider(RPC_URL);
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
-const faucetContract = new ethers.Contract(
-  "0x90323A278e8413443812ff200b2B882F76380e48",
-  abi,
-  wallet
-);
+const faucetContract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
 
 app.post("/api/claim", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
