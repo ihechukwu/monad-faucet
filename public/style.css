@@ -1,0 +1,74 @@
+/* Reset default margin and set full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: black;
+  color: #fff;
+}
+
+/* Main content container */
+main.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Headings and text */
+h1 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+}
+
+/* Input and button styling */
+input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 250px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #ff4c4c;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+footer p {
+  margin: 5px 0;
+}
+
+footer a {
+  color: #ffd700;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
