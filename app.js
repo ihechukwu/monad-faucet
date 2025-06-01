@@ -6,6 +6,10 @@ app.use(express.json());
 app.use(cors());
 const PORT = 3000;
 const { claimRouter } = require("./routers/claim");
+// Add this at the top of your API route
+res.setHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Methods", "POST");
+res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
 app.use(express.static(path.join(__dirname, "public")));
 // app.use("/api/claim", claimRouter);
