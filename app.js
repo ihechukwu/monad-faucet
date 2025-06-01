@@ -7,9 +7,6 @@ app.use(cors());
 const PORT = 3000;
 const { claimRouter } = require("./routers/claim");
 // Add this at the top of your API route
-res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Methods", "POST");
-res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
 app.use(express.static(path.join(__dirname, "public")));
 // app.use("/api/claim", claimRouter);
@@ -24,159 +21,6 @@ const RPC_URL = process.env.RPC_URL;
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 const abiPath = path.join(__dirname, "ABI.json");
 const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
-// const abi = [
-//   {
-//     inputs: [],
-//     stateMutability: "nonpayable",
-//     type: "constructor",
-//   },
-//   {
-//     anonymous: false,
-//     inputs: [
-//       {
-//         indexed: false,
-//         internalType: "uint256",
-//         name: "amount",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "FaucetSettingsChanged",
-//     type: "event",
-//   },
-//   {
-//     anonymous: false,
-//     inputs: [
-//       {
-//         indexed: true,
-//         internalType: "address",
-//         name: "recipient",
-//         type: "address",
-//       },
-//       {
-//         indexed: false,
-//         internalType: "uint256",
-//         name: "amount",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "TokensClaimed",
-//     type: "event",
-//   },
-//   {
-//     inputs: [],
-//     name: "COOLDOWN_PERIOD",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "_recipient",
-//         type: "address",
-//       },
-//     ],
-//     name: "claim",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "claimAmount",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "",
-//         type: "address",
-//       },
-//     ],
-//     name: "lastClaimTime",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "address",
-//         name: "_recipient",
-//         type: "address",
-//       },
-//     ],
-//     name: "nextClaimTime",
-//     outputs: [
-//       {
-//         internalType: "uint256",
-//         name: "",
-//         type: "uint256",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "owner",
-//     outputs: [
-//       {
-//         internalType: "address",
-//         name: "",
-//         type: "address",
-//       },
-//     ],
-//     stateMutability: "view",
-//     type: "function",
-//   },
-//   {
-//     inputs: [
-//       {
-//         internalType: "uint256",
-//         name: "_newAmount",
-//         type: "uint256",
-//       },
-//     ],
-//     name: "setClaimAmount",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     inputs: [],
-//     name: "withdrawFunds",
-//     outputs: [],
-//     stateMutability: "nonpayable",
-//     type: "function",
-//   },
-//   {
-//     stateMutability: "payable",
-//     type: "receive",
-//   },
-// ];
 
 const provider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
@@ -187,6 +31,7 @@ const faucetContract = new ethers.Contract(
 );
 
 app.post("/api/claim", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const { userAddress } = req.body;
   if (!userAddress || !ethers.isAddress(userAddress)) {
     return res.status(400).json({ error: "missing or invalid address" });
