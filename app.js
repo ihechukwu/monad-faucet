@@ -176,7 +176,11 @@ const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
 
 const provider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
-const faucetContract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
+const faucetContract = new ethers.Contract(
+  "0x90323A278e8413443812ff200b2B882F76380e48",
+  abi,
+  wallet
+);
 
 app.post("/api/claim", async (req, res) => {
   const { userAddress } = req.body;
