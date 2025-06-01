@@ -12,7 +12,7 @@ document.getElementById("claimBtn").addEventListener("click", async () => {
   resultDiv.style.color = "black";
 
   try {
-    const res = await fetch("http://localhost:3000/api/claim", {
+    const res = await fetch("https://monad-faucet-three.vercel.app/api/claim", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userAddress: address }),
