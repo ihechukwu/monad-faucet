@@ -174,7 +174,7 @@ const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
 //   },
 // ];
 
-const provider = new ethers.JsonRpcProvider(RPC_URL);
+const provider = new ethers.JsonRpcProvider("https://testnet-rpc.monad.xyz");
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 const faucetContract = new ethers.Contract(CONTRACT_ADDRESS, abi, wallet);
 
